@@ -18,6 +18,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
+$IP = "/home/tools/mediawiki-1.23.2";
 $wgSitename = "ChinaEnglishDic";
 $wgSiteNotice = "Welcome to Melissa's '''China-English-Dictionary''' site !";
 
@@ -26,11 +27,20 @@ $wgSiteNotice = "Welcome to Melissa's '''China-English-Dictionary''' site !";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "/mediawiki-1.23.2";
+#$wgScriptPath = "/mediawiki-1.23.2";
+$wgScriptPath = "";
+#$wgScriptPath = "";
+#$wgScriptPath = "/dic";
+#$wgScriptPath = "";
 $wgScriptExtension = ".php";
 
+#$wgArticlePath = "/wiki/$1";
+$wgArticlePath = "$wgScriptPath?title=$1";
+$wgUsePathInfo = true;
+
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://182.92.185.235";
+#$wgServer = "http://www.cnglish.org/tmp";
+#$wgServer = "http://wiki.cnglish.org";
 
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
@@ -46,8 +56,8 @@ $wgLogo = "$wgScriptPath/images/my_logo.png";
 $wgEnableEmail = false;
 $wgEnableUserEmail = true; # UPO
 
-$wgEmergencyContact = "apache@182.92.185.235";
-$wgPasswordSender = "apache@182.92.185.235";
+#$wgEmergencyContact = "apache@182.92.185.235";
+#$wgPasswordSender = "apache@182.92.185.235";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
@@ -159,4 +169,10 @@ $wgDefaultUserOptions['wikieditor-preview'] = 1;
   
 # Displays the Publish and Cancel buttons on the top right side
 $wgDefaultUserOptions['wikieditor-publish'] = 1;
+
+
+# kongqx: Config local namespace
+define("NS_CEWORD", 100);
+$wgExtraNamespaces[100] = "CEWord";
+
 
