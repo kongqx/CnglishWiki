@@ -175,4 +175,6 @@ $wgDefaultUserOptions['wikieditor-publish'] = 1;
 define("NS_CEWORD", 100);
 $wgExtraNamespaces[100] = "CEWord";
 
-
+require_once "$IP/extensions/ExtensionInstaller/ExtensionInstaller.php";
+enableSemantics( 'cnglish.org' );
+include_once "$IP/extensions/SemanticForms/SemanticForms.php";
