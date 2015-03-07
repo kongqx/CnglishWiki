@@ -20,7 +20,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 $IP = "/home/tools/mediawiki-1.23.2";
 $wgSitename = "ChinaEnglishDic";
-$wgSiteNotice = "Welcome to Melissa's '''China-English-Dictionary''' site !";
+$wgSiteNotice = "Welcome to Xiaohui Qin's '''China English Dictionary''' site !";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -39,7 +39,7 @@ $wgArticlePath = "$wgScriptPath?title=$1";
 $wgUsePathInfo = true;
 
 ## The protocol and server name to use in fully-qualified URLs
-#$wgServer = "http://www.cnglish.org/tmp";
+$wgServer = "http://www.cnglish.org";
 #$wgServer = "http://wiki.cnglish.org";
 
 ## The relative URL path to the skins directory
@@ -119,6 +119,7 @@ $wgUpgradeKey = "4291a790daf2d5bb";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'cologneblue', 'monobook', 'vector':
+#$wgDefaultSkin = "vector";
 $wgDefaultSkin = "vector";
 
 ## For attaching licensing metadata to pages, and displaying an
@@ -132,9 +133,16 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
+# kongqx: first letter case-sensitive
+$wgCapitalLinks = false;
+
+# kongqx: user right define here.
 # The following permissions were set based on your choice in the installer
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['read'] = true;
+$wgGroupPermissions['user']['edit'] = false;
+$wgGroupPermissions['user']['read'] = true;
 
 # Enabled Extensions. Most extensions are enabled by including the base extension file here
 # but check specific extension documentation for more details
@@ -168,7 +176,7 @@ $wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
 $wgDefaultUserOptions['wikieditor-preview'] = 1;
   
 # Displays the Publish and Cancel buttons on the top right side
-$wgDefaultUserOptions['wikieditor-publish'] = 1;
+#$wgDefaultUserOptions['wikieditor-publish'] = 1;
 
 
 # kongqx: Config local namespace
@@ -177,4 +185,24 @@ $wgExtraNamespaces[100] = "CEWord";
 
 require_once "$IP/extensions/ExtensionInstaller/ExtensionInstaller.php";
 enableSemantics( 'cnglish.org' );
+
+#SematicForms configurations
 include_once "$IP/extensions/SemanticForms/SemanticForms.php";
+$sfgRenameEditTabs = true;
+$sfgRenameMainEditTab = true;
+$wgGroupPermissions['*']['viewedittab'] = false;
+$wgGroupPermissions['sysop']['viewedittab'] = true;
+$smwgLinksInValues = true;
+
+#Dynamic Page List
+require_once("$IP/extensions/intersection/DynamicPageList.php");
+# Configuration variables. Warning: These use DLP instead of DPL
+# for historical reasons (pretend Dynamic list of pages)
+$wgDLPmaxCategories = 6;                // Maximum number of categories to look for
+$wgDLPMaxResultCount = 200;             // Maximum number of results to allow
+$wgDLPAllowUnlimitedResults = false;    // Allow unlimited results
+$wgDLPAllowUnlimitedCategories = false; // Allow unlimited categories
+// How long to cache pages using DPL's in seconds. Default to 1 day. Set to
+// false to use the normal amount of page caching (most efficient), Set to 0 to disable
+// cache altogether (inefficient, but results will never be outdated)
+$wgDLPMaxCacheTime = 60*60*24;          // How long to cache pages in seconds
